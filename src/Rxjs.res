@@ -107,7 +107,7 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 @module("rxjs") external deferPromise: (unit => Js.Promise.t<'a>) => t<foreign, void, 'a> = "defer"
 @module("rxjs") external delayWhen: (unit => t<'c, 's, ()>, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "delayWhen"
 @module("rxjs") external distinct: (unit, . t<'co, 'so, 'a>) => t<'co, 'so, 'a> = "distinct"
-@module("rxjs") external distinctUntilChanged: ((. 'a, 'a) => bool, . t<'co, 'so, 'a>) => t<'co, 'so, 'a> = "distinctUntilChanged"
+@module("rxjs") external distinctUntilChanged: (@uncurry (('a, 'a) => bool), . t<'co, 'so, 'a>) => t<'co, 'so, 'a> = "distinctUntilChanged"
 
 @module("rxjs") external filter: ('a => bool, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "filter"
 @module("rxjs") external finalize: (() => (), . t<'c, 's, 'a>) => t<'c, 's, 'a> = "finalize"
@@ -123,8 +123,8 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 @module("rxjs") external interval: int => t<foreign, void, int> = "interval"
 @module("rxjs") external last: (unit, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "last"
 @module("rxjs") external lastValueFrom: t<'c, 's, 'a> => Js.Promise.t<'a> = "lastValueFrom"
-@module("rxjs") external map: (. ('a, int) => 'b, . t<'c,'s,'a>) => t<'c, 's, 'b> = "map"
-let const: ('b, . t<'c, 's, 'a>) => t<'c, 's, 'b> = (b) => map(. (_, _) => b)
+@module("rxjs") external map: (@uncurry (('a, int) => 'b), . t<'c,'s,'a>) => t<'c, 's, 'b> = "map"
+let const: ('b, . t<'c, 's, 'a>) => t<'c, 's, 'b> = (b) => map((_, _) => b)
 
 
 @module("rxjs") external merge2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'a>) => t<foreign, void, 'a> = "merge"
@@ -157,9 +157,9 @@ type timeinterval<'a> = { interval: int, value: 'a }
 
 let keepMap: ('a => option<'b>, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = (f, . xs) => {
   xs->pipe3(
-    map(.(a, _) => f(a)),
+    map((a, _) => f(a)),
     filter(Js.Option.isSome),
-    map(.(a, _) => Js.Option.getExn(a))
+    map((a, _) => Js.Option.getExn(a))
   )
 }
 
