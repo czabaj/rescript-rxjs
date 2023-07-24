@@ -80,6 +80,7 @@ module Subject = {
 
 @send external subscribe: (t<'class, 'source, 'a>, t<'co, source<'a>, 'out>) => subscription = "subscribe"
 @send external subscribe_: (t<'class, 'source, 'a>, t<'co, source<'a>, 'out>) => unit = "subscribe"
+@send external subscribeFn: (t<'class, 'source, 'a>, 'a => unit) => subscription = "subscribe"
 @send external unsubscribe: subscription => unit = "unsubscribe"
 
 module BehaviorSubject = {
@@ -111,6 +112,7 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 
 @module("rxjs") external filter: ('a => bool, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "filter"
 @module("rxjs") external finalize: (() => (), . t<'c, 's, 'a>) => t<'c, 's, 'a> = "finalize"
+@module("rxjs") external first: (unit, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "first"
 
 // type filter<'a, 'c, 's>> = {
 //   fn: ('a => bool, . t<'c, 's, 'a>) => t<'c, 's, 'a>
