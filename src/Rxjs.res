@@ -155,11 +155,17 @@ type timeinterval<'a> = { interval: int, value: 'a }
 @module("rxjs") external withLatestFrom6: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f)> = "withLatestFrom"
 @module("rxjs") external withLatestFrom7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, t<'cg, 'sg, 'g>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f, 'g)> = "withLatestFrom"
 
-let keepMap: ('a => option<'b>, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = (f, . xs) => {
-  xs->pipe3(
-    map((a, _) => f(a)),
+let keepSome = (.xs) => {
+  xs->pipe2(
     filter(Js.Option.isSome),
     map((a, _) => Js.Option.getExn(a))
+  )
+}
+
+let keepMap: ('a => option<'b>, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = (f, . xs) => {
+  xs->pipe2(
+    map((a, _) => f(a)),
+    keepSome
   )
 }
 
