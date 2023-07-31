@@ -119,6 +119,8 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 // }
 // let filter = { fn: filter }
 
+@module("rxjs") external fromEvent: (. 'eventTarget, string) => t<foreign, void, 'a> = "fromEvent"
+@module("rxjs") external fromEventSelect: (. 'eventTarget, string, 'event => 'a) => t<foreign, void, 'a> = "fromEvent"
 @module("rxjs") external fromArray: array<'a> => t<foreign, void, 'a> = "from"
 @module("rxjs") external fromPromise: Js.Promise.t<'a> => t<foreign, void, 'a> = "from"
 @module("rxjs") external fromPromiseSched: (Js.Promise.t<'a>, scheduler) => t<foreign, void, 'a> = "from"
