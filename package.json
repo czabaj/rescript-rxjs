@@ -28,10 +28,11 @@
     "url": "git+ssh://github.com/noble-ai/rescript-rxjs.git"
   },
   "devDependencies": {
-    "rescript": "^9.1.4",
+    "@rescript/core": "^1.1.0",
+    "rescript": "^11.0.1",
     "rxjs": "^7.5.5"
   },
   "peerDependencies": {
-    "rxjs": "^7.5.5"
+    "rxjs": "^7.8.1"
   }
 }

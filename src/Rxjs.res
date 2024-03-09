@@ -70,13 +70,13 @@ module Subject = {
 
 @send external next: (t<'class, source<'a>, 'b>, 'a) => unit = "next"
 
-@send external pipe: (t<'class, 'source, 'a>, (. t<'class, 'source, 'a>) => t<'class, 'source, 'b>) => t<'class, 'source, 'b> = "pipe"
-@send external pipe2: (t<'class, 'source, 'a>, ((. t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((. t<'class, 'source, 'b>) => t<'class, 'source, 'c>)) => t<'class, 'source, 'c> = "pipe"
-@send external pipe3: (t<'class, 'source, 'a>, ((. t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((. t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((. t<'class, 'source, 'c>) => t<'class, 'source, 'd>)) => t<'class, 'source, 'd> = "pipe"
-@send external pipe4: (t<'class, 'source, 'a>, ((. t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((. t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((. t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((. t<'class, 'source, 'd>) => t<'class, 'source, 'e>)) => t<'class, 'source, 'e> = "pipe"
-@send external pipe5: (t<'class, 'source, 'a>, ((. t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((. t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((. t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((. t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((. t<'class, 'source, 'e>) => t<'class, 'source, 'f>)) => t<'class, 'source, 'f> = "pipe"
-@send external pipe6: (t<'class, 'source, 'a>, ((. t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((. t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((. t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((. t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((. t<'class, 'source, 'e>) => t<'class, 'source, 'f>), ((. t<'class, 'source, 'f>) => t<'class, 'source, 'g>)) => t<'class, 'source, 'g> = "pipe"
-@send external pipe7: (t<'class, 'source, 'a>, ((. t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((. t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((. t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((. t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((. t<'class, 'source, 'e>) => t<'class, 'source, 'f>), ((. t<'class, 'source, 'f>) => t<'class, 'source, 'g>), ((. t<'class, 'source, 'g>) => t<'class, 'source, 'h>)) => t<'class, 'source, 'h> = "pipe"
+@send external pipe: (t<'class, 'source, 'a>, (t<'class, 'source, 'a>) => t<'class, 'source, 'b>) => t<'class, 'source, 'b> = "pipe"
+@send external pipe2: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>)) => t<'class, 'source, 'c> = "pipe"
+@send external pipe3: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>)) => t<'class, 'source, 'd> = "pipe"
+@send external pipe4: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>)) => t<'class, 'source, 'e> = "pipe"
+@send external pipe5: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((t<'class, 'source, 'e>) => t<'class, 'source, 'f>)) => t<'class, 'source, 'f> = "pipe"
+@send external pipe6: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((t<'class, 'source, 'e>) => t<'class, 'source, 'f>), ((t<'class, 'source, 'f>) => t<'class, 'source, 'g>)) => t<'class, 'source, 'g> = "pipe"
+@send external pipe7: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((t<'class, 'source, 'e>) => t<'class, 'source, 'f>), ((t<'class, 'source, 'f>) => t<'class, 'source, 'g>), ((t<'class, 'source, 'g>) => t<'class, 'source, 'h>)) => t<'class, 'source, 'h> = "pipe"
 
 @send external subscribe: (t<'class, 'source, 'a>, t<'co, source<'a>, 'out>) => subscription = "subscribe"
 @send external subscribe_: (t<'class, 'source, 'a>, t<'co, source<'a>, 'out>) => unit = "subscribe"
@@ -89,8 +89,8 @@ module BehaviorSubject = {
 
 external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 
-@module("rxjs") external buffer: (t<'ca, 'sa, 'a>, . t<'cb, 'sb, 'b>) => t<'cb, 'sb, array<'b>> = "buffer"
-@module("rxjs") external catchError: (err => t<'class, 'source, 'a>, . t<'class, 'source, 'a>) => t<'class, 'source, 'a> = "catchError"
+@module("rxjs") external buffer: (t<'ca, 'sa, 'a>) => t<'cb, 'sb, 'b> => t<'cb, 'sb, array<'b>> = "buffer"
+@module("rxjs") external catchError: (err => t<'class, 'source, 'a>) => t<'class, 'source, 'a> => t<'class, 'source, 'a> = "catchError"
 
 @module("rxjs") external combineLatest2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>) => t<foreign, void, ('a, 'b)> = "combineLatest"
 @module("rxjs") external combineLatest3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>) => t<foreign, void, ('a, 'b, 'c)> = "combineLatest"
@@ -100,34 +100,29 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 @module("rxjs") external combineLatest7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, t<'cg, 'sg, 'g>) => t<foreign, void, ('a, 'b, 'c, 'd, 'e, 'f, 'g)> = "combineLatest"
 @module("rxjs") external combineLatestArray: array<t<foreign, void, 'a>> => t<foreign, void, array<'a>> = "combineLatest"
 
-@module("rxjs") external concatAll: (unit, . t<'co, 'so, t<'c, 's, 'b>>) => t<'co, 'so, 'b> = "concatAll"
-@module("rxjs") external concatMap: ('a => t<foreign, void, 'b>, . t<'c, 's, 'a>) => t<'c, 's, 'b> = "concatMap"
-@module("rxjs") external debounce: (t<'ca, 'sa, 'a>, . t<'cb, 'sb, 'b>) => t<'cb, 'sb, 'b> = "debounce"
+@module("rxjs") external concatAll: (t<'co, 'so, t<'c, 's, 'b>>) => t<'co, 'so, 'b> = "concatAll"
+@module("rxjs") external concatMap: ('a => t<foreign, void, 'b>) => t<'c, 's, 'a> => t<'c, 's, 'b> = "concatMap"
+@module("rxjs") external debounce: t<'ca, 'sa, 'a> => t<'cb, 'sb, 'b> => t<'cb, 'sb, 'b> = "debounce"
 @module("rxjs") external defer: (unit => t<'c, 's, 'a>) => t<foreign, void, 'a> = "defer"
-@module("rxjs") external deferPromise: (unit => Js.Promise.t<'a>) => t<foreign, void, 'a> = "defer"
-@module("rxjs") external delay: (int, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "delay"
-@module("rxjs") external delayWhen: (unit => t<'c, 's, ()>, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "delayWhen"
-@module("rxjs") external distinct: (unit, . t<'co, 'so, 'a>) => t<'co, 'so, 'a> = "distinct"
-@module("rxjs") external distinctUntilChanged: ((. 'a, 'a) => bool, . t<'co, 'so, 'a>) => t<'co, 'so, 'a> = "distinctUntilChanged"
+@module("rxjs") external deferPromise: (unit => Promise.t<'a>) => t<foreign, void, 'a> = "defer"
+@module("rxjs") external delay: (int) => t<'c, 's, 'a> => t<'c, 's, 'a> = "delay"
+@module("rxjs") external delayWhen: (unit => t<'c, 's, ()>) => t<'c, 's, 'a> => t<'c, 's, 'a> = "delayWhen"
+@module("rxjs") external distinct: (unit) => t<'co, 'so, 'a> => t<'co, 'so, 'a> = "distinct"
+@module("rxjs") external distinctUntilChanged: (('a, 'a) => bool) => t<'co, 'so, 'a> => t<'co, 'so, 'a> = "distinctUntilChanged"
 
-@module("rxjs") external filter: ('a => bool, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "filter"
-@module("rxjs") external finalize: (() => (), . t<'c, 's, 'a>) => t<'c, 's, 'a> = "finalize"
+@module("rxjs") external filter: ('a => bool) =>  t<'c, 's, 'a> => t<'c, 's, 'a> = "filter"
+@module("rxjs") external finalize: (() => ()) => t<'c, 's, 'a> => t<'c, 's, 'a> = "finalize"
 
-// type filter<'a, 'c, 's>> = {
-//   fn: ('a => bool, . t<'c, 's, 'a>) => t<'c, 's, 'a>
-// }
-// let filter = { fn: filter }
-
-@module("rxjs") external fromEvent: (. 'eventTarget, string) => t<foreign, void, 'a> = "fromEvent"
-@module("rxjs") external fromEventSelect: (. 'eventTarget, string, 'event => 'a) => t<foreign, void, 'a> = "fromEvent"
+@module("rxjs") external fromEvent: ('eventTarget, string) => t<foreign, void, 'a> = "fromEvent"
+@module("rxjs") external fromEventSelect: ('eventTarget, string, 'event => 'a) => t<foreign, void, 'a> = "fromEvent"
 @module("rxjs") external fromArray: array<'a> => t<foreign, void, 'a> = "from"
-@module("rxjs") external fromPromise: Js.Promise.t<'a> => t<foreign, void, 'a> = "from"
-@module("rxjs") external fromPromiseSched: (Js.Promise.t<'a>, scheduler) => t<foreign, void, 'a> = "from"
+@module("rxjs") external fromPromise: Promise.t<'a> => t<foreign, void, 'a> = "from"
+@module("rxjs") external fromPromiseSched: (Promise.t<'a>, scheduler) => t<foreign, void, 'a> = "from"
 @module("rxjs") external interval: int => t<foreign, void, int> = "interval"
-@module("rxjs") external last: (unit, . t<'c, 's, 'a>) => t<'c, 's, 'a> = "last"
-@module("rxjs") external lastValueFrom: t<'c, 's, 'a> => Js.Promise.t<'a> = "lastValueFrom"
-@module("rxjs") external map: (. ('a, int) => 'b, . t<'c,'s,'a>) => t<'c, 's, 'b> = "map"
-let const: ('b, . t<'c, 's, 'a>) => t<'c, 's, 'b> = (b) => map(. (_, _) => b)
+@module("rxjs") external last: t<'c, 's, 'a> => t<'c, 's, 'a> = "last"
+@module("rxjs") external lastValueFrom: t<'c, 's, 'a> => Promise.t<'a> = "lastValueFrom"
+@module("rxjs") external map: (('a, int) => 'b) => t<'c,'s,'a> => t<'c, 's, 'b> = "map"
+let const: ('b) => t<'c, 's, 'a> => t<'c, 's, 'b> = (b) => map((_, _) => b)
 
 
 @module("rxjs") external merge2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'a>) => t<foreign, void, 'a> = "merge"
@@ -145,39 +140,39 @@ let const: ('b, . t<'c, 's, 'a>) => t<'c, 's, 'b> = (b) => map(. (_, _) => b)
 @module("rxjs") external mergeWith6: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'a>, t<'cc, 'sc, 'a>, t<'cd, 'sd, 'a>, t<'ce, 'se, 'a>, . t<'cf, 'sf, 'a>) => t<foreign, void, 'a> = "mergeWith" 
 @module("rxjs") external mergeWith7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'a>, t<'cc, 'sc, 'a>, t<'cd, 'sd, 'a>, t<'ce, 'se, 'a>, t<'cf, 'sf, 'a>, . t<'cg, 'sg, 'a>) => t<foreign, void, 'a> = "mergeWith"
 
-@module("rxjs") external mergeAll: (unit, . t<'ca, 'sa, t<'c, 's, 'b>>) => t<'ca, 'sa, 'b> = "mergeAll"
+@module("rxjs") external mergeAll: unit => t<'ca, 'sa, t<'c, 's, 'b>> => t<'ca, 'sa, 'b> = "mergeAll"
 @module("rxjs") external return: 'a => t<foreign, void, 'a> = "of" // of is keyword so rename
-@module("rxjs") external reduce: ( ('b, 'a, int) => 'b, 'b, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = "reduce"
-@module("rxjs") external scan: ( ('b, 'a, int) => 'b, 'b, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = "scan"
-@module("rxjs") external share: (unit, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'a> = "share"
-@module("rxjs") external shareReplay: (int, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'a> = "shareReplay"
-@module("rxjs") external startWith: ('a, .t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'a> = "startWith"
-@module("rxjs") external switchMap: ('a => t<'cb, 'sb, 'b>, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = "switchMap"
-@module("rxjs") external take: (int, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'a> = "take"
-@module("rxjs") external tap: ('a => unit, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'a> = "tap"
-@module("rxjs") external tapErrorComplete: ('a => unit, err => unit, unit => unit, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'a> = "tap"
+@module("rxjs") external reduce: (('b, 'a, int) => 'b, 'b) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'b> = "reduce"
+@module("rxjs") external scan: (('b, 'a, int) => 'b, 'b) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'b> = "scan"
+@module("rxjs") external share: unit => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "share"
+@module("rxjs") external shareReplay: int => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "shareReplay"
+@module("rxjs") external startWith: 'a => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "startWith"
+@module("rxjs") external switchMap: ('a => t<'cb, 'sb, 'b>) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'b> = "switchMap"
+@module("rxjs") external take: (int) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "take"
+@module("rxjs") external tap: ('a => unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "tap"
+@module("rxjs") external tapErrorComplete: ('a => unit, err => unit, unit => unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "tap"
 type timeinterval<'a> = { interval: int, value: 'a }
-@module("rxjs") external timeInterval: (unit, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, timeinterval<'a>> = "timeInterval"
-@module("rxjs") external toArray: (unit, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, array<'a>> = "toArray"
-@module("rxjs") external withLatestFrom: (t<'ca, 'sa, 'a>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom4: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom5: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom6: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, t<'cg, 'sg, 'g>, . t<'cz, 'sz, 'z>) => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f, 'g)> = "withLatestFrom"
+@module("rxjs") external timeInterval: (unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, timeinterval<'a>> = "timeInterval"
+@module("rxjs") external toArray: (unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, array<'a>> = "toArray"
+@module("rxjs") external withLatestFrom: (t<'ca, 'sa, 'a>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom4: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom5: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom6: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, t<'cg, 'sg, 'g>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f, 'g)> = "withLatestFrom"
 
-let keepMap: ('a => option<'b>, . t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = (f, . xs) => {
+let keepMap: (('a => option<'b>), t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = (f, xs) => {
   xs->pipe3(
-    map(.(a, _) => f(a)),
-    filter(Js.Option.isSome),
-    map(.(a, _) => Js.Option.getExn(a))
+    map((a, _) => f(a)),
+    filter(Option.isSome),
+    map((a, _) => Option.getExn(a))
   )
 }
 
 let distinctBy = (fn: 'a => 'b) => {
-  (. source: t<'class, 'source, 'a>): t<'class, 'source, 'a> => {
-    Observable.make( (subscriber) => {
+  (source: t<'class, 'source, 'a>): t<'class, 'source, 'a> => {
+    Observable.make((subscriber) => {
       let last = ref(None)
       let sub = source->subscribe(Observer.make(
         ~next=(x) => {
@@ -189,7 +184,7 @@ let distinctBy = (fn: 'a => 'b) => {
             ()
           }
         },
-        ~error=Subscriber.error(subscriber),
+        ~error=(e) => Subscriber.error(subscriber, e),
         ~complete=() => Subscriber.complete(subscriber),
         ()))
       Some(() => unsubscribe(sub))
