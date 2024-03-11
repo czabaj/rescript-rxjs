@@ -1,4 +1,3 @@
-
 // Observables have a few different implementations
 // and some other behaviour based on their pipeline.
 
@@ -28,6 +27,8 @@ type err
 type subscription
 type scheduler
 
+type operatorFunction<'class, 'source, 'a, 'b> = t<'class, 'source, 'a> => t<'class, 'source, 'b>
+
 let void: t<'class, 'source, 'b> => unit = _ => ()
 
 module Observer = {
@@ -41,7 +42,7 @@ module Observer = {
 
   external toT: make<'a> => t<'a> = "%identity"
 
-  let make = (~next=?, ~error=?, ~complete=?, ()) => 
+  let make = (~next=?, ~error=?, ~complete=?, ()) =>
     make(~next?, ~error?, ~complete?, ())->toT
 }
 
@@ -59,7 +60,7 @@ external asyncScheduler: scheduler = "asyncScheduler"
 external asapScheduler: scheduler = "asapScheduler"
 
 module Observable = {
-  @module("rxjs") @new external make: (Subscriber.t<'a> => option<() => unit>) => t<'c, 's, 'a> = "Observable"
+  @module("rxjs") @new external make: (Subscriber.t<'a> => option<unit => unit>) => t<'c, 's, 'a> = "Observable"
 }
 
 module Subject = {
@@ -70,16 +71,17 @@ module Subject = {
 
 @send external next: (t<'class, source<'a>, 'b>, 'a) => unit = "next"
 
-@send external pipe: (t<'class, 'source, 'a>, (t<'class, 'source, 'a>) => t<'class, 'source, 'b>) => t<'class, 'source, 'b> = "pipe"
-@send external pipe2: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>)) => t<'class, 'source, 'c> = "pipe"
-@send external pipe3: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>)) => t<'class, 'source, 'd> = "pipe"
-@send external pipe4: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>)) => t<'class, 'source, 'e> = "pipe"
-@send external pipe5: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((t<'class, 'source, 'e>) => t<'class, 'source, 'f>)) => t<'class, 'source, 'f> = "pipe"
-@send external pipe6: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((t<'class, 'source, 'e>) => t<'class, 'source, 'f>), ((t<'class, 'source, 'f>) => t<'class, 'source, 'g>)) => t<'class, 'source, 'g> = "pipe"
-@send external pipe7: (t<'class, 'source, 'a>, ((t<'class, 'source, 'a>) => t<'class, 'source, 'b>), ((t<'class, 'source, 'b>) => t<'class, 'source, 'c>), ((t<'class, 'source, 'c>) => t<'class, 'source, 'd>), ((t<'class, 'source, 'd>) => t<'class, 'source, 'e>), ((t<'class, 'source, 'e>) => t<'class, 'source, 'f>), ((t<'class, 'source, 'f>) => t<'class, 'source, 'g>), ((t<'class, 'source, 'g>) => t<'class, 'source, 'h>)) => t<'class, 'source, 'h> = "pipe"
+@send external pipe: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>) => t<'class, 'source, 'b> = "pipe"
+@send external pipe2: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>, operatorFunction<'class, 'source, 'b, 'c>) => t<'class, 'source, 'c> = "pipe"
+@send external pipe3: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>, operatorFunction<'class, 'source, 'b, 'c>, operatorFunction<'class, 'source, 'c, 'd>) => t<'class, 'source, 'd> = "pipe"
+@send external pipe4: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>, operatorFunction<'class, 'source, 'b, 'c>, operatorFunction<'class, 'source, 'c, 'd>, operatorFunction<'class, 'source, 'd, 'e>) => t<'class, 'source, 'e> = "pipe"
+@send external pipe5: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>, operatorFunction<'class, 'source, 'b, 'c>, operatorFunction<'class, 'source, 'c, 'd>, operatorFunction<'class, 'source, 'd, 'e>, operatorFunction<'class, 'source, 'e, 'f>) => t<'class, 'source, 'f> = "pipe"
+@send external pipe6: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>, operatorFunction<'class, 'source, 'b, 'c>, operatorFunction<'class, 'source, 'c, 'd>, operatorFunction<'class, 'source, 'd, 'e>, operatorFunction<'class, 'source, 'e, 'f>, operatorFunction<'class, 'source, 'f, 'g>) => t<'class, 'source, 'g> = "pipe"
+@send external pipe7: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>, operatorFunction<'class, 'source, 'b, 'c>, operatorFunction<'class, 'source, 'c, 'd>, operatorFunction<'class, 'source, 'd, 'e>, operatorFunction<'class, 'source, 'e, 'f>, operatorFunction<'class, 'source, 'f, 'g>, operatorFunction<'class, 'source, 'g, 'h>) => t<'class, 'source, 'h> = "pipe"
 
 @send external subscribe: (t<'class, 'source, 'a>, t<'co, source<'a>, 'out>) => subscription = "subscribe"
 @send external subscribe_: (t<'class, 'source, 'a>, t<'co, source<'a>, 'out>) => unit = "subscribe"
+@send external subscribeFn: (t<'class, 'source, 'a>, 'a => unit) => subscription = "subscribe"
 @send external unsubscribe: subscription => unit = "unsubscribe"
 
 module BehaviorSubject = {
@@ -90,7 +92,7 @@ module BehaviorSubject = {
 external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 
 @module("rxjs") external buffer: (t<'ca, 'sa, 'a>) => t<'cb, 'sb, 'b> => t<'cb, 'sb, array<'b>> = "buffer"
-@module("rxjs") external catchError: (err => t<'class, 'source, 'a>) => t<'class, 'source, 'a> => t<'class, 'source, 'a> = "catchError"
+@module("rxjs") external catchError: (err => t<'class, 'source, 'a>) => operatorFunction<'class, 'source, 'a, 'a> = "catchError"
 
 @module("rxjs") external combineLatest2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>) => t<foreign, void, ('a, 'b)> = "combineLatest"
 @module("rxjs") external combineLatest3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>) => t<foreign, void, ('a, 'b, 'c)> = "combineLatest"
@@ -110,8 +112,8 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 @module("rxjs") external distinct: (unit) => t<'co, 'so, 'a> => t<'co, 'so, 'a> = "distinct"
 @module("rxjs") external distinctUntilChanged: (('a, 'a) => bool) => t<'co, 'so, 'a> => t<'co, 'so, 'a> = "distinctUntilChanged"
 
-@module("rxjs") external filter: ('a => bool) =>  t<'c, 's, 'a> => t<'c, 's, 'a> = "filter"
-@module("rxjs") external finalize: (() => ()) => t<'c, 's, 'a> => t<'c, 's, 'a> = "finalize"
+@module("rxjs") external filter: ('a => bool) => operatorFunction<'class, 'source, 'a, 'a> = "filter"
+@module("rxjs") external finalize: (unit => unit) => operatorFunction<'class, 'source, 'a, 'a> = "finalize"
 
 @module("rxjs") external fromEvent: ('eventTarget, string) => t<foreign, void, 'a> = "fromEvent"
 @module("rxjs") external fromEventSelect: ('eventTarget, string, 'event => 'a) => t<foreign, void, 'a> = "fromEvent"
@@ -119,11 +121,10 @@ external toObservable: t<'c, 's, 'a> => t<foreign, void, 'a> = "%identity"
 @module("rxjs") external fromPromise: Promise.t<'a> => t<foreign, void, 'a> = "from"
 @module("rxjs") external fromPromiseSched: (Promise.t<'a>, scheduler) => t<foreign, void, 'a> = "from"
 @module("rxjs") external interval: int => t<foreign, void, int> = "interval"
-@module("rxjs") external last: t<'c, 's, 'a> => t<'c, 's, 'a> = "last"
+@module("rxjs") external last: operatorFunction<'class, 'source, 'f, 'a> = "last"
 @module("rxjs") external lastValueFrom: t<'c, 's, 'a> => Promise.t<'a> = "lastValueFrom"
-@module("rxjs") external map: (('a, int) => 'b) => t<'c,'s,'a> => t<'c, 's, 'b> = "map"
-let const: ('b) => t<'c, 's, 'a> => t<'c, 's, 'b> = (b) => map((_, _) => b)
-
+@module("rxjs") external map: (('a, int) => 'b) => operatorFunction<'class, 'source, 'a, 'b> = "map"
+let const: 'b => operatorFunction<'class, 'source, 'a, 'b> = b => map((_, _) => b)
 
 @module("rxjs") external merge2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'a>) => t<foreign, void, 'a> = "merge"
 @module("rxjs") external merge3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'a>, t<'cc, 'sc, 'a>) => t<foreign, void, 'a> = "merge"
@@ -142,53 +143,61 @@ let const: ('b) => t<'c, 's, 'a> => t<'c, 's, 'b> = (b) => map((_, _) => b)
 
 @module("rxjs") external mergeAll: unit => t<'ca, 'sa, t<'c, 's, 'b>> => t<'ca, 'sa, 'b> = "mergeAll"
 @module("rxjs") external return: 'a => t<foreign, void, 'a> = "of" // of is keyword so rename
-@module("rxjs") external reduce: (('b, 'a, int) => 'b, 'b) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'b> = "reduce"
-@module("rxjs") external scan: (('b, 'a, int) => 'b, 'b) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'b> = "scan"
-@module("rxjs") external share: unit => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "share"
-@module("rxjs") external shareReplay: int => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "shareReplay"
-@module("rxjs") external startWith: 'a => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "startWith"
-@module("rxjs") external switchMap: ('a => t<'cb, 'sb, 'b>) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'b> = "switchMap"
-@module("rxjs") external take: (int) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "take"
-@module("rxjs") external tap: ('a => unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "tap"
-@module("rxjs") external tapErrorComplete: ('a => unit, err => unit, unit => unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, 'a> = "tap"
+@module("rxjs") external reduce: (('b, 'a, int) => 'b, 'b) => operatorFunction<'class, 'source, 'a, 'b> = "reduce"
+@module("rxjs") external scan: (('b, 'a, int) => 'b, 'b) => operatorFunction<'class, 'source, 'a, 'b> = "scan"
+@module("rxjs") external share: unit => operatorFunction<'class, 'source, 'a, 'a> = "share"
+@module("rxjs") external shareReplay: int => operatorFunction<'class, 'source, 'a, 'a> = "shareReplay"
+@module("rxjs") external startWith: 'a => operatorFunction<'class, 'source, 'a, 'a> = "startWith"
+@module("rxjs") external switchMap: ('a => t<'cb, 'sb, 'b>) => operatorFunction<'class, 'source, 'a, 'b> = "switchMap"
+@module("rxjs") external take: (int) => operatorFunction<'class, 'source, 'a, 'a> = "take"
+@module("rxjs") external tap: ('a => unit) => operatorFunction<'class, 'source, 'a, 'a> = "tap"
+@module("rxjs") external tapErrorComplete: ('a => unit, err => unit, unit => unit) => operatorFunction<'class, 'source, 'a, 'a> = "tap"
 type timeinterval<'a> = { interval: int, value: 'a }
-@module("rxjs") external timeInterval: (unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, timeinterval<'a>> = "timeInterval"
-@module("rxjs") external toArray: (unit) => t<'ca, 'sa, 'a> => t<'ca, 'sa, array<'a>> = "toArray"
-@module("rxjs") external withLatestFrom: (t<'ca, 'sa, 'a>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom4: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom5: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom6: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f)> = "withLatestFrom"
-@module("rxjs") external withLatestFrom7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, t<'cg, 'sg, 'g>) => t<'cz, 'sz, 'z> => t<'cz, 'sz, ('z, 'a, 'b, 'c, 'd, 'e, 'f, 'g)> = "withLatestFrom"
+@module("rxjs") external timeInterval: (unit) => operatorFunction<'class, 'source, 'a, timeinterval<'a>> = "timeInterval"
+@module("rxjs") external toArray: (unit) => operatorFunction<'class, 'source, 'a, array<'a>> = "toArray"
+@module("rxjs") external withLatestFrom: (t<'ca, 'sa, 'a>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom2: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a, 'b)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom3: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a, 'b, 'c)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom4: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a, 'b, 'c, 'd)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom5: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a, 'b, 'c, 'd, 'e)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom6: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a, 'b, 'c, 'd, 'e, 'f)> = "withLatestFrom"
+@module("rxjs") external withLatestFrom7: (t<'ca, 'sa, 'a>, t<'cb, 'sb, 'b>, t<'cc, 'sc, 'c>, t<'cd, 'sd, 'd>, t<'ce, 'se, 'e>, t<'cf, 'sf, 'f>, t<'cg, 'sg, 'g>) => operatorFunction<'cz, 'sz, 'z, ('z, 'a, 'b, 'c, 'd, 'e, 'f, 'g)> = "withLatestFrom"
 
-let keepMap: (('a => option<'b>), t<'ca, 'sa, 'a>) => t<'ca, 'sa, 'b> = (f, xs) => {
-  xs->pipe3(
-    map((a, _) => f(a)),
-    filter(Option.isSome),
-    map((a, _) => Option.getExn(a))
-  )
-}
+/**
+ * This is a helper function which allows use ReScript built-in pipe operator
+ * instead of `pipeN`. The ReScript compiler then "evaporates" this `op`
+ * function so it compiles to simple nested chain of function calls.
+ * See `keepMap` below for an example of how to use it.
+ */
+let op: (t<'class, 'source, 'a>, operatorFunction<'class, 'source, 'a, 'b>) => t<'class, 'source, 'b> = (xs, operator) => operator(xs)
+
+let keepMap: ('a => option<'b>) => operatorFunction<'class, 'source, 'a, 'b> = f => xs =>
+  xs
+    ->op(map((a, _) => f(a)))
+    ->op(filter(Option.isSome))
+    ->op(map((a, _) => Option.getExn(a)))
 
 let distinctBy = (fn: 'a => 'b) => {
   (source: t<'class, 'source, 'a>): t<'class, 'source, 'a> => {
-    Observable.make((subscriber) => {
+    Observable.make(subscriber => {
       let last = ref(None)
-      let sub = source->subscribe(Observer.make(
-        ~next=(x) => {
-          let fnx = fn(x)
-          if( Some(fnx) != last.contents) {
-            last.contents = Some(fnx)
-            subscriber->Subscriber.next(x)
-          } else {
-            ()
-          }
-        },
-        ~error=(e) => Subscriber.error(subscriber, e),
-        ~complete=() => Subscriber.complete(subscriber),
-        ()))
+      let sub = source->subscribe(
+        Observer.make(
+          ~next=x => {
+            let fnx = fn(x)
+            if Some(fnx) != last.contents {
+              last.contents = Some(fnx)
+              subscriber->Subscriber.next(x)
+            } else {
+              ()
+            }
+          },
+          ~error=e => Subscriber.error(subscriber, e),
+          ~complete=() => Subscriber.complete(subscriber),
+          (),
+        ),
+      )
       Some(() => unsubscribe(sub))
     })
+  }
 }
-}
-
